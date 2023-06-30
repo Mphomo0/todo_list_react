@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'; // Importing CSS file
+import React from 'react';
+import { useSelector } from 'react-redux'; // Importing useSelector hook from react-redux library
+import TodoForm from './components/TodoForm'; // Importing TodoForm component
+import TodoItem from './components/TodoItem'; // Importing TodoItem component
 
-function App() {
+const App = () => {
+  const todos = useSelector(state => state.todos); // Using useSelector hook to access the todos state from Redux store
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <h1>Todo App</h1> {/* Render a heading */}
+      <TodoForm /> {/* Render TodoForm component */}
+      <ul>
+        {todos.map(todo => (
+          <TodoItem key={todo.id} todo={todo} /> // Render TodoItem component for each todo in the todos array
+        ))}
+      </ul>
     </div>
   );
-}
+};
 
 export default App;
